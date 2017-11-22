@@ -24,9 +24,6 @@ public class Customer {
         return (hasLoyaltyCard);
     }
 
-    public Basket hasBasket() {
-        return this.customerBasket;
-    }
 }
     
  
