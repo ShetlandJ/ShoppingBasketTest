@@ -3,7 +3,6 @@ package myfirstgame.shoppingbasket;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -66,32 +65,32 @@ public class TestBasket {
         basket.addItemToBasket(item2);
         basket.addItemToBasket(item3);
 
-        int basketTotal = basket.getBasketTotal(customer1);
-        assertEquals(9, basketTotal);
+        double basketTotal = basket.getBasketTotal(customer1);
+        assertEquals(9, basketTotal, 0.1);
     }
 
     @Test
     public void basketIsDiscountedAfterCostIs20OrGreater() throws Exception {
         basket.addItemToBasket(item4);
 
-        int basketTotal = basket.getBasketTotal(customer1);
-        assertEquals(90, basketTotal);
+        double basketTotal = basket.getBasketTotal(customer1);
+        assertEquals(90, basketTotal, 0.1);
     }
 
     @Test
     public void customerHasLoyaltyDiscount__true() throws Exception {
         basket.addItemToBasket(item4);
 
-        int basketTotal = basket.getBasketTotal(customer2);
-        assertEquals(88, basketTotal);
+        double basketTotal = basket.getBasketTotal(customer2);
+        assertEquals(88.2, basketTotal, 0.1);
     }
 
     @Test
     public void customerHasLoyaltyDiscount__false() throws Exception {
         basket.addItemToBasket(item4);
 
-        int basketTotal = basket.getBasketTotal(customer1);
-        assertEquals(90, basketTotal);
+        double basketTotal = basket.getBasketTotal(customer1);
+        assertEquals(90, basketTotal, 0.1);
     }
 
     @Test
@@ -102,7 +101,7 @@ public class TestBasket {
         basket.addItemToBasket(item5);
 
 
-        assertEquals(10.0, basket.buyOneGetOneFreeChecker(), 0.1);
+        assertEquals(120.0, basket.buyOneGetOneFreeChecker(), 0.1);
     }
 
     @Test
@@ -117,10 +116,34 @@ public class TestBasket {
     public void canApplyBuyOneGetOneFree__two_items() throws Exception {
         basket.addItemToBasket(item1);
         basket.addItemToBasket(item2);
-        basket.addItemToBasket(item3);
-        basket.addItemToBasket(item3);
+        basket.addItemToBasket(item5);
+        basket.addItemToBasket(item5);
 
-        assertEquals(9.0, basket.buyOneGetOneFreeChecker(), 0.1);
+        assertEquals(14.0, basket.buyOneGetOneFreeChecker(), 0.1);
+    }
+
+    @Test
+    public void canApplyBuyOneGetOneFree__four_items() throws Exception {
+        basket.addItemToBasket(item1); // price 5
+        basket.addItemToBasket(item2); // price 1
+        basket.addItemToBasket(item5); // price 10
+        basket.addItemToBasket(item5); // price 10 (price amount removed thanks to BOGOF)
+        basket.addItemToBasket(item5); // price 10
+        basket.addItemToBasket(item5); // price 10 (price amount removed thanks to BOGOF)
+
+        assertEquals(24.0, basket.buyOneGetOneFreeChecker(), 0.1);
+    }
+
+    @Test
+    public void canApplyBuyOneGetOneFree__four_items__and_customer_is_loyal() throws Exception {
+        basket.addItemToBasket(item1); // price 5
+        basket.addItemToBasket(item2); // price 1
+        basket.addItemToBasket(item5); // price 10
+        basket.addItemToBasket(item5); // price 10 (price amount removed thanks to BOGOF)
+        basket.addItemToBasket(item5); // price 10
+        basket.addItemToBasket(item5); // price 10 (price amount removed thanks to BOGOF)
+
+        assertEquals(21.16, basket.getBasketTotal(customer2), 0.1);
     }
 
     @Test
@@ -128,8 +151,7 @@ public class TestBasket {
         basket.addItemToBasket(item5);
         basket.addItemToBasket(item5);
 
-        int basketTotal = basket.getBasketTotal(customer1);
-        assertEquals(10, basketTotal);
-
+        double basketTotal = basket.getBasketTotal(customer1);
+        assertEquals(10, basketTotal, 0.1);
     }
 }

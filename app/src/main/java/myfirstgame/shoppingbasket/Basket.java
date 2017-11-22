@@ -42,9 +42,13 @@ public class Basket {
         double total = 0;
         for( Item item : basketItems ){
 
-            if(!tempBuyOneGetOneFreeArray.contains(item) && (item.getBuyOneGetOneFreeStatus())) {
-                tempBuyOneGetOneFreeArray.add(item);
-                total += item.getPrice();
+            if(!tempBuyOneGetOneFreeArray.contains(item)) {
+                if (item.getBuyOneGetOneFreeStatus()) {
+                    tempBuyOneGetOneFreeArray.add(item);
+                    total += item.getPrice();
+                } else {
+                    total += item.getPrice();
+                }
             } else {
                 tempBuyOneGetOneFreeArray.remove(item);
             }
@@ -52,11 +56,9 @@ public class Basket {
         return total;
     }
 
-    public int getBasketTotal(Customer customer) {
-        int total = 0;
-        for (Item item : this.basketItems) {
-            total += item.getPrice();
-        }
+    public double getBasketTotal(Customer customer) {
+        double total = buyOneGetOneFreeChecker();
+
         if (total > 20) {
             total -= (total * (10 / 100.0));
         }
