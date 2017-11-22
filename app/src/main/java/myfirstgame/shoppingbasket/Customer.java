@@ -16,12 +16,16 @@ public class Customer {
         this.customerBasket = customerBasket;
     }
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
-    public boolean loyaltyCardCheck() {
+    protected boolean loyaltyCardCheck() {
         return (hasLoyaltyCard);
+    }
+
+    public Basket hasBasket() {
+        return this.customerBasket;
     }
 }
     

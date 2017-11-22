@@ -16,23 +16,23 @@ public class Item {
         this.buyOneGetOneFree = buyOneGetOneFree;
     }
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
-    public double getPrice() {
+    protected double getPrice() {
         return price;
     }
 
-    public boolean getBuyOneGetOneFreeStatus() {
+    protected boolean getBuyOneGetOneFreeStatus() {
         return buyOneGetOneFree;
     }
 
-    public void setBuyOneGetOneFreeStatus(boolean status) {
+    protected void setBuyOneGetOneFreeStatus(boolean status) {
         this.buyOneGetOneFree = status;
     }
 
-    public void setDiscountAmount(double discountAmount) {
+    protected void setDiscountAmount(double discountAmount) {
         this.price -= (this.price*(discountAmount/100.0));
     }
 }

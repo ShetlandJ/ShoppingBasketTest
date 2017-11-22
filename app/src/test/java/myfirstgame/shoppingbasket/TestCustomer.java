@@ -34,4 +34,5 @@ public class TestCustomer {
     public void customerCanHaveLoyaltyCard__false() throws Exception {
         assertEquals(false, customer.loyaltyCardCheck());
     }
+
 }

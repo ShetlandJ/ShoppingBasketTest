@@ -1,14 +1,6 @@
 package myfirstgame.shoppingbasket;
 
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * Created by James on 22/11/2017.
@@ -26,15 +18,13 @@ public class Basket {
         return basketItems.size();
     }
 
-    public void addItemToBasket(Item item) {
+    protected void addItemToBasket(Item item) {
         basketItems.add(item);
     }
 
-    public void removeItemFromBasket(Item item) {
+    protected void removeItemFromBasket(Item item) {
         basketItems.remove(item);
     }
-
-
 
     public double buyOneGetOneFreeChecker() {
 
